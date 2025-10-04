@@ -1,1 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zakaria Oulad Ben Brahim</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.95);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+        }
+
+        .hero-matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 1;
+            background: #000;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.6) 0%, rgba(26, 31, 58, 0.5) 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 3;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #a0aec0;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        #about {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+        }
+
+        .matrix-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0;
+            background: #000;
+            display: none;
+        }
+
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: transparent;
+            z-index: 2;
+            display: none;
+        }
+
+        #about .section-title,
+        #about .about-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-img-container {
+            text-align: center;
+        }
+
+        .profile-img-photo {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #667eea;
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .about-text p {
+            color: #a0aec0;
+            font-size: 1.1rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: #667eea;
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .skill-card p {
+            color: #a0aec0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-category {
+            margin-bottom: 4rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: #667eea;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            color: #a0aec0;
+            font-size: 0.95rem;
+        }
+
+        .knowledge-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .knowledge-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .knowledge-section p {
+            color: #a0aec0;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .knowledge-list {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .knowledge-list li {
+            color: #a0aec0;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .knowledge-list li:before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .contact-contenucht {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .contact-item h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item p {
+            color: #a0aec0;
+        }
+
+        footer {
+            background: rgba(10, 14, 39, 0.95);
+            padding: 2rem 0;
+            text-align: center;
+            color: #a0aec0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">ZIKO</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <canvas class="hero-matrix-bg"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Zakaria Oulad Ben Brahim</h1>
+            <p class="subtitle">Ethical Hacker | 3D Artist | Python Developer | AI Enthusiast</p>
+            <a href="#about" class="cta-button">Get to Know Me</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="about">
+            <canvas class="matrix-background"></canvas>
+            <div class="background-overlay"></div>
+            
+            <h2 class="section-title">À Propos De Moi</h2>
+            <div class="about-content">
+                <div class="profile-img-container">
+                    <img src="zakaria.jpeg" alt="ZIKO" class="profile-img-photo">
+                </div>
+                <div class="about-text">
+                    <p>Salut!, je suis actuellement étudiant en deuxième année à la Faculté Polydisciplinaire de Larache, dans la filière Mathématiques-Informatique. Cette formation me permet d'acquérir une base solide dans les domaines mathématiques et informatiques.</p>
+                    <br>
+                    <p>Je développe mes compétences en Blender pour la modélisation 3D, je m'initie à l'intelligence artificielle et au hacking éthique, et je programme en Python. Cette combinaison d'études académiques et de compétences techniques me prépare à une carrière dans le secteur technologique.</p>
+                    <br>
+                    <p>Cette combinaison d'études académiques et de compétences techniques autodidactes me prépare à un avenir professionnel riche et diversifié dans le secteur technologique.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Mes Compétences</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🛡️</div>
+                    <h3>Ethical Hacking</h3>
+                    <p>Penetration testing, vulnerability assessment, network security, and cybersecurity fundamentals.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>Blender 3D</h3>
+                    <p>3D modeling, animation, texturing, and rendering using Blender for creative projects.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🐍</div>
+                    <h3>Python</h3>
+                    <p>Programming, automation, web scraping, data analysis, and scripting with Python.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🤖</div>
+                    <h3>Artificial Intelligence</h3>
+                    <p>Machine learning basics, AI tools, and exploring emerging AI technologies.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Mes Projets</h2>
+
+            <div class="project-category">
+                <h3 style="color: #667eea; font-size: 2rem; margin-bottom: 2rem;">🎨 Projets Blender 3D</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <img src="tennis_ball.png" alt="Balle de Tennis 3D" style="width: 100%; height: 250px; object-fit: cover;">
+                        <div class="project-content">
+                            <h3>Modèle Balle de Tennis</h3>
+                            <p>Balle de tennis 3D réaliste avec cartographie de texture détaillée, incluant un matériau de surface duveteuse et des motifs de coutures authentiques. Comprend un travail avancé sur les shaders pour un rendu photoréaliste.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="low_poly_car.png" alt="Voiture Low-Poly" style="width: 100%; height: 250px; object-fit: cover;">
+                        <div class="project-content">
+                            <h3>Voiture Low-Poly</h3>
+                            <p>Design de voiture low-poly stylisée avec une géométrie propre et des couleurs vibrantes. Parfait pour les assets de jeux ou scènes animées, avec une topologie optimisée et des matériaux personnalisés.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="basketball.png" alt="Basketball 3D" style="width: 100%; height: 250px; object-fit: cover;">
+                        <div class="project-content">
+                            <h3>Modèle Basketball</h3>
+                            <p>Basketball de haute qualité avec des détails de panneaux précis, texture de cuir et propriétés de matériaux appropriées. Inclut un bump mapping et une configuration d'éclairage réaliste pour des rendus de qualité studio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-category">
+                <h3 style="color: #667eea; font-size: 2rem; margin-bottom: 2rem;">🐍 Projets Python</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">🔢</div>
+                        <div class="project-content">
+                            <h3>Calculatrice Avancée</h3>
+                            <p>Application de calculatrice complète avec interface graphique. Supporte les opérations arithmétiques de base, les fonctions scientifiques, le stockage en mémoire et l'historique des calculs.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">🐍</div>
+                        <div class="project-content">
+                            <h3>Jeu du Serpent</h3>
+                            <p>Jeu classique du serpent développé avec Python et Pygame. Comprend un gameplay fluide, suivi du score, niveaux de difficulté croissants et détection de collision avec un code orienté objet propre.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-category">
+                <h3 style="color: #667eea; font-size: 2rem; margin-bottom: 2rem;">🛡️ Connaissances en Hacking Éthique</h3>
+                <div class="knowledge-section">
+                    <h3>Sécurité Réseau & Tests d'Intrusion</h3>
+                    <p>J'ai développé des connaissances approfondies en hacking éthique et cybersécurité à travers la pratique et l'étude. Mon expertise couvre divers aspects de la sécurité réseau, des attaques sans fil et des techniques de collecte d'informations.</p>
+                    
+                    <p><strong>Domaines d'Expertise Clés :</strong></p>
+                    <ul class="knowledge-list">
+                        <li><strong>Tests de Sécurité WiFi :</strong> Compétent dans le cracking de réseaux WiFi en utilisant des attaques basées sur des listes de mots, compréhension des vulnérabilités WPA/WPA2, et mise en œuvre d'attaques par dictionnaire avec des outils comme Aircrack-ng et Hashcat.</li>
+                        <li><strong>Fondamentaux de Kali Linux :</strong> Solide base dans le système d'exploitation Kali Linux, incluant les opérations en ligne de commande, la configuration réseau et l'utilisation de la boîte à outils étendue pour les tests d'intrusion et évaluations de sécurité.</li>
+                        <li><strong>Défense Réseau :</strong> Compréhension de la protection des réseaux WiFi par une configuration appropriée, des protocoles de chiffrement forts, le filtrage d'adresses MAC et la mise en œuvre de méthodes d'authentification sécurisées pour prévenir les accès non autorisés.</li>
+                        <li><strong>Attaques Man-in-the-Middle :</strong> Connaissance des techniques d'attaque MITM, usurpation ARP, capture de paquets et méthodes d'interception de trafic, ainsi que la compréhension des contre-mesures et mécanismes de détection.</li>
+                        <li><strong>Collecte d'Informations :</strong> Compétent dans les techniques de reconnaissance incluant la collecte d'informations passive et active, OSINT (Open Source Intelligence), scan réseau, énumération et empreinte des systèmes cibles.</li>
+                        <li><strong>Sécurité des Emails :</strong> Compréhension des techniques d'usurpation d'emails, falsification des en-têtes d'email, analyse des vulnérabilités SMTP et reconnaissance des tentatives de phishing pour mieux comprendre et prévenir les attaques d'ingénierie sociale.</li>
+                    </ul>
+                    
+                    <p>Ces connaissances sont appliquées strictement dans les limites éthiques à des fins éducatives et de tests de sécurité autorisés, en suivant toujours les principes de divulgation responsable et les cadres légaux.</p>
+                </div>
+            </div>
+
+            <div class="project-category">
+                <h3 style="color: #667eea; font-size: 2rem; margin-bottom: 2rem;">🤖 Intelligence Artificielle</h3>
+                <div class="knowledge-section">
+                    <h3>Fondamentaux de l'IA & Apprentissage Automatique</h3>
+                    <p>J'ai commencé mon voyage dans le monde fascinant de l'Intelligence Artificielle, apprenant les concepts fondamentaux qui alimentent les systèmes d'IA modernes. Mes études se concentrent sur la compréhension de la façon dont les machines peuvent apprendre à partir de données et prendre des décisions intelligentes.</p>
+                    
+                    <p><strong>Domaines de Connaissances Clés :</strong></p>
+                    <ul class="knowledge-list">
+                        <li><strong>Bases de l'Apprentissage Automatique :</strong> Compréhension de l'apprentissage supervisé et non supervisé, entraînement de modèles, et le concept d'algorithmes apprenant des patterns à partir de données sans programmation explicite.</li>
+                        <li><strong>Réseaux de Neurones :</strong> Introduction aux réseaux de neurones artificiels, compréhension des couches, neurones, fonctions d'activation, et comment les modèles d'apprentissage profond traitent l'information.</li>
+                        <li><strong>Outils & Frameworks IA :</strong> Familiarité avec les bibliothèques et frameworks d'IA populaires, explorant leurs capacités pour construire et entraîner des modèles d'apprentissage automatique.</li>
+                        <li><strong>Prétraitement des Données :</strong> Apprentissage de l'importance du nettoyage des données, de la normalisation et de la préparation pour entraîner des modèles d'IA efficaces.</li>
+                        <li><strong>Applications de l'IA :</strong> Compréhension des applications réelles de l'IA en vision par ordinateur, traitement du langage naturel et analyse prédictive.</li>
+                        <li><strong>Technologies Émergentes :</strong> Rester à jour avec les développements en IA, incluant les grands modèles de langage, l'IA générative et les considérations éthiques dans le développement de l'IA.</li>
+                    </ul>
+                    
+                    <p>Je continue d'élargir mes connaissances en IA à travers des projets pratiques et en explorant les derniers développements dans ce domaine en évolution rapide, avec l'objectif d'appliquer des solutions d'IA pour résoudre des problèmes du monde réel.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">Entrer En Contact</h2>
+            <div class="contact-contenucht">
+                <div class="contact-item">
+                    <div style="font-size: 2rem; color: #667eea; margin-bottom: 1rem;">📧</div>
+                    <h3>Email</h3>
+                    <p>ouladbenbrahimzakaria@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <div style="font-size: 2rem; color: #667eea; margin-bottom: 1rem;">📱</div>
+                    <h3>Numéro De Téléphone</h3>
+                    <p>+212 705354592</p>
+                </div>
+                <div class="contact-item">
+                    <div style="font-size: 2rem; color: #667eea; margin-bottom: 1rem;">💻</div>
+                    <h3>GitHub</h3>
+                    <p>Check out my code repositories</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Zakaria Oulad Ben Brahim. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Matrix-style animation for About section
+        const aboutCanvas = document.querySelector('#about .matrix-background');
+        const aboutCtx = aboutCanvas.getContext('2d');
+
+        // Matrix-style animation for Hero section
+        const heroCanvas = document.querySelector('.hero-matrix-bg');
+        const heroCtx = heroCanvas.getContext('2d');
+
+        function resizeCanvas() {
+            const aboutSection = document.getElementById('about');
+            aboutCanvas.width = aboutSection.offsetWidth;
+            aboutCanvas.height = aboutSection.offsetHeight;
+
+            const heroSection = document.getElementById('home');
+            heroCanvas.width = heroSection.offsetWidth;
+            heroCanvas.height = heroSection.offsetHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const characters = '01';
+        const fontSize = 16;
+        
+        // About section drops
+        const aboutColumns = aboutCanvas.width / fontSize;
+        const aboutDrops = [];
+        for (let i = 0; i < aboutColumns; i++) {
+            aboutDrops[i] = Math.random() * -100;
+        }
+
+        // Hero section drops
+        const heroColumns = heroCanvas.width / fontSize;
+        const heroDrops = [];
+        for (let i = 0; i < heroColumns; i++) {
+            heroDrops[i] = Math.random() * -100;
+        }
+
+        function drawAbout() {
+            aboutCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            aboutCtx.fillRect(0, 0, aboutCanvas.width, aboutCanvas.height);
+
+            aboutCtx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < aboutDrops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                
+                // Brighter green color for the leading character
+                aboutCtx.fillStyle = '#0f0';
+                aboutCtx.fillText(text, i * fontSize, aboutDrops[i] * fontSize);
+                
+                // Dimmer trail
+                aboutCtx.fillStyle = '#0a0';
+                if (aboutDrops[i] > 1) {
+                    aboutCtx.fillText(
+                        characters.charAt(Math.floor(Math.random() * characters.length)),
+                        i * fontSize,
+                        (aboutDrops[i] - 1) * fontSize
+                    );
+                }
+
+                if (aboutDrops[i] * fontSize > aboutCanvas.height && Math.random() > 0.975) {
+                    aboutDrops[i] = 0;
+                }
+
+                aboutDrops[i]++;
+            }
+        }
+
+        function drawHero() {
+            heroCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            heroCtx.fillRect(0, 0, heroCanvas.width, heroCanvas.height);
+
+            heroCtx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < heroDrops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                
+                // Brighter green color for the leading character
+                heroCtx.fillStyle = '#0f0';
+                heroCtx.fillText(text, i * fontSize, heroDrops[i] * fontSize);
+                
+                // Dimmer trail
+                heroCtx.fillStyle = '#0a0';
+                if (heroDrops[i] > 1) {
+                    heroCtx.fillText(
+                        characters.charAt(Math.floor(Math.random() * characters.length)),
+                        i * fontSize,
+                        (heroDrops[i] - 1) * fontSize
+                    );
+                }
+
+                if (heroDrops[i] * fontSize > heroCanvas.height && Math.random() > 0.975) {
+                    heroDrops[i] = 0;
+                }
+
+                heroDrops[i]++;
+            }
+        }
+
+        setInterval(() => {
+            drawHero();
+        }, 50);
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
